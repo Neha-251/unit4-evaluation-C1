@@ -7,19 +7,19 @@ app.use(logger, checkPermission);
 
 app.get("/books", logger, (req, res) => {
     return res.send(
-        { route: "/books", role: req.role, response : req.response}
+        { route: "/books", role: req.role, permission : req.response}
     );
 })
 
 app.get("/libraries", logger, checkPermission("librarian"), (req, res) => {
     return res.send(
-        { route: "/libraries", role: req.role, response : req.response}
+        { route: "/libraries", role: req.role, permission : req.response}
     );
 })
 
 app.get("/authors", logger, checkPermission("author"), (req, res) => {
     return res.send(
-        { route: "/authors", role: req.role, response : req.response}
+        { route: "/authors", role: req.role, permission : req.response}
     );
 })
 
@@ -43,13 +43,11 @@ function logger(req, res, next) {
 
 function checkPermission(Permission){
 
-    function logger(req, res, next){
+    return function logger(req, res, next){
         if(Permission == "author"){
             req.response = "true";
          } else if(Permission == "librarian") {
              req.response = "true";
-         } else {
-             req.response = "false";
          }
      
          console.log(req.path);
@@ -60,6 +58,6 @@ function checkPermission(Permission){
 }
 
 
-app.listen("4000", ()=> {
-    console.log("Server is running on 4000");
+app.listen("5000", ()=> {
+    console.log("Server is running on 5000");
 })
