@@ -5,21 +5,21 @@ const app = express();
 
 app.use(logger, checkPermission);
 
-app.get("/books", (req, res) => {
+app.get("/books", logger, (req, res) => {
     return res.send(
-        { route: "/books", role: req.role, Permission : req.response}
+        { route: "/books", role: req.role, response : req.response}
     );
 })
 
-app.get("/libraries", logger, checkPermission, (req, res) => {
+app.get("/libraries", logger, checkPermission("librarian"), (req, res) => {
     return res.send(
-        { route: "/libraries", role: req.role, Permission : req.response}
+        { route: "/libraries", role: req.role, response : req.response}
     );
 })
 
-app.get("/authors", logger, checkPermission, (req, res) => {
+app.get("/authors", logger, checkPermission("author"), (req, res) => {
     return res.send(
-        { route: "/authors", role: req.role, Permission : req.response}
+        { route: "/authors", role: req.role, response : req.response}
     );
 })
 
@@ -41,19 +41,22 @@ function logger(req, res, next) {
     next();
 }
 
-function checkPermission(req, res, next){
+function checkPermission(Permission){
 
-    if(req.path == "/authors"){
-
-       req.response = "true";
-    } else if(req.path == "/libraries") {
-        req.response = "true";
-    } else {
-        req.response = "false";
+    function logger(req, res, next){
+        if(Permission == "author"){
+            req.response = "true";
+         } else if(Permission == "librarian") {
+             req.response = "true";
+         } else {
+             req.response = "false";
+         }
+     
+         console.log(req.path);
+         next();
     }
 
-    console.log(req.path);
-    next();
+    
 }
 
 
