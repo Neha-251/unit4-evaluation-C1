@@ -1,0 +1,23 @@
+{
+  "name": "unit4-evaluation-c1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neha-251/unit4-evaluation-C1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Neha-251/unit4-evaluation-C1/issues"
+  },
+  "homepage": "https://github.com/Neha-251/unit4-evaluation-C1#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
